@@ -50,20 +50,24 @@ export default function ShowTasks() {
   };
 
   return (
-    <section className="main-sections">
-      {tasks.length > 0 &&
-        tasks.map((task: TaskI) => (
-          <article className="main-articles" key={task.id}>
-            <h2 className="main-articles-title">{task.name}</h2>
-            <p>Status: {task.status ? "Completed" : "Pending"}</p>
-            <p>Date: {task.date}</p>
-            <Link to={`/task/update/${task.id}`} onClick={() => updateTaskContext(task)}>
-              Modifier
-            </Link>
+    <>
+      <Link to="/">Retour à l'accueil</Link>
+      <section className="main-sections">
+        {tasks.length > 0 &&
+          tasks.map((task: TaskI) => (
+            <article className="main-articles" key={task.id}>
+              <h2 className="main-articles-title">{task.name}</h2>
+              <p>Status: {task.status ? "Completed" : "Pending"}</p>
+              <p>Date: {task.date}</p>
+              <Link to={`/task/update/${task.id}`} onClick={() => updateTaskContext(task)}>
+                Modifier
+              </Link>
 
-            <DeleteTask taskId={task.id} />
-          </article>
-        ))}
-    </section>
+              <DeleteTask taskId={task.id} />
+            </article>
+          ))}
+      </section>
+    </>
+      
   );
 }

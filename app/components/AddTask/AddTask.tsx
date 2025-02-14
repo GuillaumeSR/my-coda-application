@@ -1,13 +1,12 @@
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, useContext } from "react";
 import { useNavigate } from "react-router";
+import { TaskContext } from "~/shared/contexts/TaskContext";
+import type { TaskI } from "~/shared/interfaces/Task.interface";
 
 export default function AddTask() {
   const navigate = useNavigate();
-  const [task, setTask] = useState({
-    name: "",
-    status: 0,
-    date: "",
-  });
+
+  let { task, setTask } = useContext(TaskContext);
 
   const submitForm = async (e: FormEvent) => {
     e.preventDefault();
@@ -39,7 +38,13 @@ export default function AddTask() {
         type="text"
         name="name"
         value={task.name}
-        onChange={(e) => setTask({ ...task, name: e.target.value })}
+        onChange={(e) => {
+          let newName = e.target.value ?? null;
+          setTask((task: TaskI) => {
+            task.name = newName;
+            return task;
+          });
+        }}
         required
       />
 
@@ -48,7 +53,13 @@ export default function AddTask() {
         type="date"
         name="date"
         value={task.date}
-        onChange={(e) => setTask({ ...task, date: e.target.value })}
+        onChange={(e) => {
+          let newDate = e.target.value ?? null;
+          setTask((task: TaskI) => {
+            task.date = newDate;
+            return task;
+          });
+        }}
         required
       />
 
@@ -56,7 +67,12 @@ export default function AddTask() {
       <select
         name="status"
         value={task.status}
-        onChange={(e) => setTask({ ...task, status: Number(e.target.value) })}
+        onChange={(e) => {
+          setTask((task: TaskI) => {
+            task.status = Boolean(e.target.value);
+            return task;
+          });
+        }}
         required
       >
         <option value={0}>Non complété</option>

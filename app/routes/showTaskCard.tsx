@@ -1,6 +1,9 @@
 import { useState, useContext } from "react";
 import type { Route } from "../+types/root";
+import type { TaskI } from "~/shared/interfaces/Task.interface";
+import { TaskContext } from "~/shared/contexts/TaskContext";
 import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 export async function loader({ params }: Route.LoaderArgs) {
   /**
@@ -12,7 +15,7 @@ export default function ShowTaskCard({ params }: Route.ComponentProps) {
   const { id } = params;
   let navigate = useNavigate();
 
-  let [task, setTask] = useState({ name: "", status: 0, date: "" });
+  let { task, setTask } = useContext(TaskContext);
 
   const submitUpdateForm = async (e: any) => {
     e.preventDefault();
@@ -35,41 +38,63 @@ export default function ShowTaskCard({ params }: Route.ComponentProps) {
           throw new Error("Le statut de la requête est invalide.");
         }
 
-        navigate("/tasks/list");
+        navigate("/task/list");
       })
       .catch((err) => console.error(err));
   };
 
   return (
-    <form action="#" method="POST" onSubmit={submitUpdateForm}>
-      <label htmlFor="name">Nom</label>
-      <input
-        type="text"
-        name="name"
-        defaultValue={task.name}
-        onChange={(e) => setTask({ ...task, name: e.target.value })}
-        required
-      />
-      <label htmlFor="status">Statut</label>
-      <select
-        name="status"
-        defaultValue={task.status}
-        onChange={(e) => setTask({ ...task, status: Number(e.target.value) })}
-        required
-      >
-        <option value={0}>Non terminé</option>
-        <option value={1}>Terminé</option>
-      </select>
-      <label htmlFor="date">Date</label>
-      <input
-        type="date"
-        name="date"
-        defaultValue={task.date}
-        onChange={(e) => setTask({ ...task, date: e.target.value })}
-        required
-      />
-      <input type="hidden" value={id} name="id" />
-      <button type="submit">Mettre à jour</button>
-    </form>
+    <>
+      <Link to="/">Retour à l'accueil</Link>
+      <form action="#" method="POST" onSubmit={submitUpdateForm}>
+        <label htmlFor="name">Nom</label>
+        <input
+          type="text"
+          name="name"
+          defaultValue={task.name}
+          onChange={(e) => {
+            let newName = e.target.value ?? null;
+            setTask((task: TaskI) => {
+              task.name = newName;
+              return task;
+            });
+          }}
+          
+          required
+        />
+        <label htmlFor="status">Statut</label>
+        <select
+          name="status"
+          defaultValue={task.status}
+          onChange={(e) => {
+            setTask((task: TaskI) => {
+              task.status = Boolean(e.target.value);
+              return task;
+            });
+          }}
+          required
+        >
+          <option value={0}>Non terminé</option>
+          <option value={1}>Terminé</option>
+        </select>
+        <label htmlFor="date">Date</label>
+        <input
+          type="date"
+          name="date"
+          defaultValue={task.date}
+          onChange={(e) => {
+            let newDate = e.target.value ?? null;
+            setTask((task: TaskI) => {
+              task.date = newDate;
+              return task;
+            });
+          }}
+          required
+        />
+        <input type="hidden" value={id} name="id" />
+        <button type="submit">Mettre à jour</button>
+      </form>
+    </>
+    
   );
 }

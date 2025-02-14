@@ -58,16 +58,13 @@ class Task {
     $this->setName($task["name"]);
     $this->setStatus($task["status"]);
     $this->setDate($task["date"]);
-    $this->setCreationDate($task["creation_date"]);
   }
 
   public function getAllProperties() {
     return [
-      "id" => $this->getId(),
       "name" => $this->getName(),
       "status" => $this->getStatus(),
       "date" => $this->getDate(),
-      "creation_date" => $this->getCreationDate(),
     ];
   }
 
