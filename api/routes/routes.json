@@ -1,0 +1,52 @@
+[
+  {
+    "path": "/",
+    "controller": "Home",
+    "action": "Index",
+    "method": "GET",
+    "params": []
+  },
+  {
+    "path": "/task/add",
+    "controller": "Task",
+    "action": "Add",
+    "method": "POST",
+    "params": [
+      "task"
+    ]
+  },
+  {
+    "path": "/task/get/list",
+    "controller": "Task",
+    "action": "ShowList",
+    "method": "GET",
+    "params": []
+  },
+  {
+    "path": "/task/get",
+    "controller": "Task",
+    "action": "Show",
+    "method": "GET",
+    "params": [
+      "id"
+    ]
+  },
+  {
+    "path": "/task/update",
+    "controller": "Task",
+    "action": "Update",
+    "method": "PUT",
+    "params": [
+      "task"
+    ]
+  },
+  {
+    "path": "/task/delete",
+    "controller": "Task",
+    "action": "Delete",
+    "method": "DELETE",
+    "params": [
+      "id"
+    ]
+  }
+]

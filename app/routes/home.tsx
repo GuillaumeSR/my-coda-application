@@ -1,13 +1,20 @@
+import { Link } from "react-router";
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Accueil" },
+    { name: "description", content: "Bienvenue sur l'application React PHP Coda." },
   ];
 }
 
 export default function Home() {
-  return <Welcome />;
+  return <>
+    <Link to="/task/add">
+      Ajouter une tâche
+    </Link>
+    <Link to="/task/list">
+      Voir la liste des tâches
+    </Link>
+  </>;
 }
