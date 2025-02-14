@@ -21,7 +21,7 @@ export default function ShowTaskCard({ params }: Route.ComponentProps) {
       throw new Error("Le nom et la date de la tâche sont requis.");
     }
 
-    await fetch("http://localhost:5500/tasks/update", {
+    await fetch("http://localhost:5500/task/update", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

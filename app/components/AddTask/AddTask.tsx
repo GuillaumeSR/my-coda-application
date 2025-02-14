@@ -15,7 +15,7 @@ export default function AddTask() {
       throw new Error("Le nom et la date sont requis.");
     }
 
-    await fetch("http://127.0.0.1:5500/tasks/add", {
+    await fetch("http://127.0.0.1:5500/task/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
