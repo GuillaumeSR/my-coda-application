@@ -9,12 +9,14 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <>
-    <Link to="/task/add">
-      Ajouter une tâche
-    </Link>
-    <Link to="/task/list">
-      Voir la liste des tâches
-    </Link>
-  </>;
+  return (
+    <>
+      <Link to="/task/add">
+        Ajouter une tâche
+      </Link>
+      <Link to="/task/list">
+        Voir la liste des tâches
+      </Link>
+    </>
+  );
 }
